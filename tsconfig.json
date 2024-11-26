@@ -11,8 +11,8 @@
         "forceConsistentCasingInFileNames": true,
         "allowJs": true,
         "outDir": "./static",
-        "rootDir": "./src"
+        "rootDir": "project"
     },
-    "include": ["./src/**/*"],
+    "include": ["project/**/*"],
     "exclude": ["./static"]
 }

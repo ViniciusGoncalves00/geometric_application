@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports =
 {
-    entry: './src/index.ts',
+    entry: './project/index.ts',
     output:
     {
         filename: 'bundle.js',
@@ -20,7 +20,7 @@ module.exports =
         open: true,
         compress: true,
         historyApiFallback: true,
-        watchFiles: [path.resolve(__dirname, "./src/templates/**/*.html")],
+        watchFiles: [path.resolve(__dirname, "./project/templates/**/*.html")],
     },
     resolve:
     {
