@@ -1,11 +1,19 @@
-<div class="fixed w-[128px] h-full p-2">
-    <div class="w-full h-full rounded-[8px]
+<div x-data="{geometries_open : false, simulations_open : false}" class="relative w-[256px] h-full pl-2 pr-2">
+    <div class="w-full max-h-[100%] overflow-auto
                 bg-secondary drop-shadow-custom-shadow
                 text-primary_text
-                flex items-center justify-evenly">
-        <button>edit mode</button>
-        <button>display mode</button>
-        <button>visualization mode</button>
-        <button>export mode</button>
+                flex flex-col">
+        <button @click="geometries_open = !geometries_open" class="hover:bg-primary">GEOMETRIES</button>
+        <div x-show="geometries_open" class="w-[100%] h-full overflow-y-auto text-center text-[16px] flex flex-col">
+            <template x-for="i in 20">
+                <button class="hover:text-black" x-text="i"></button>
+            </template>
+        </div>
+        <button @click="simulations_open = !simulations_open" class="hover:bg-primary">SIMULATIONS</button>
+        <div x-show="simulations_open" class="w-[100%] h-full overflow-y-auto text-center text-[16px] flex flex-col">
+            <template x-for="i in 20">
+                <button class="hover:text-black" x-text="i"></button>
+            </template>
+        </div>
     </div>
 </div>

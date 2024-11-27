@@ -9,19 +9,11 @@ export class HandleMesh
     {
         this._sceneManager = SceneManager.GetInstance();
     }
-
-    public Move(mesh : THREE.Mesh, direction : THREE.Vector3, distance : number)
-    {
-        direction.normalize();
-        let offset = direction.multiplyScalar(distance);
-        mesh.position.add(offset);
-    }
-
-    public GenerateMesh(): THREE.Mesh
+    
+    public CreateCube(): THREE.Mesh
     {
         const geometry = new THREE.BoxGeometry(1, 1, 1);
-        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-        const cube = new THREE.Mesh(geometry, material);
+        const cube = new THREE.Mesh(geometry);
         const meshes = this._sceneManager.Scene.children.filter(child => child instanceof THREE.Mesh);
         let index = 0;
         let name = "mesh_" + index;

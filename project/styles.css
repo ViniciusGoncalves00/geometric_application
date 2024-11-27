@@ -7,8 +7,8 @@
     --primary: 255, 255, 255;
     --secondary: 250, 250, 250;
 
-    --primary_text: 20, 20, 20;
-    --secondary_text: 20, 20, 20;
+    --primary_text: 0, 0, 0;
+    --secondary_text: 50, 50, 50;
 }
 
 [data-theme='custom_dark']
