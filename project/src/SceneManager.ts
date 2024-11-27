@@ -10,7 +10,7 @@ export class SceneManager
     private constructor()
     {
         this.Scene = new THREE.Scene();
-        this.Scene.background = new THREE.Color(0.98, 0.98, 0.98)
+        this.Scene.background = new THREE.Color(0.50, 0.90, 0.90)
 
         this.Camera = new THREE.PerspectiveCamera(
             60,
