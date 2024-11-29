@@ -1,6 +1,22 @@
 import * as THREE from 'three';
 import { SceneManager } from './SceneManager';
 
+interface ThreeCube {
+    name : string;
+    
+    position_x : number;
+    position_y : number;
+    position_z : number;
+    
+    rotation_x : number;
+    rotation_y : number;
+    rotation_z : number;
+    
+    scale_x : number;
+    scale_y : number;
+    scale_z : number;
+}
+
 export class MeshHandler
 {
     private _sceneManager : SceneManager;
@@ -10,30 +26,39 @@ export class MeshHandler
         this._sceneManager = SceneManager.GetInstance();
     }
 
-    public InitializeComponents()
+    public LoadObjects() : THREE.Object3D[]
     {
-        const value = JSON.parse(document.getElementById('value')?.textContent || '{}');
-        console.log(value);
-        const geometry = new THREE.BoxGeometry(1, 1, 1);
-        const cube = new THREE.Mesh(geometry);
+        console.log("Load");
 
-        cube.name = value.name;
-        cube.position.x = value.position_x;
-        cube.position.y = value.position_y;
-        cube.position.z = value.position_z;
-        cube.rotation.x = value.rotation_x;
-        cube.rotation.y = value.rotation_y;
-        cube.rotation.z = value.rotation_z;
-        cube.scale.x = value.scale_x;
-        cube.scale.y = value.scale_y;
-        cube.scale.z = value.scale_z;
+        const data = JSON.parse(document.getElementById('mesh_data')?.textContent || '[]');
+        
+        let objects: THREE.Object3D[] = [];
+    
+        if (Array.isArray(data)) {
+            for (let value of data) {
+                const object = value as ThreeCube;
+    
+                const geometry = new THREE.BoxGeometry(1, 1, 1);
+                const cube = new THREE.Mesh(geometry);
+    
+                cube.name = object.name;
+                cube.position.set(object.position_x, object.position_y, object.position_z);
+                cube.rotation.set(object.rotation_x, object.rotation_y, object.rotation_z);
+                cube.scale.set(object.scale_x, object.scale_y, object.scale_z);
 
-        this._sceneManager.Scene.add(cube);
-        this._sceneManager.Renderer.render(this._sceneManager.Scene, this._sceneManager.Camera);
+                objects.push(cube);
+                this._sceneManager.Scene.add(cube);
+            }
+        } else {
+            console.error("Loaded data is not in the expected format.");
+        }
+    
+        return objects;
     }
     
-    public CreateCube(): THREE.Mesh
+    public CreateObject(): THREE.Object3D
     {
+        console.log("Create");
         const geometry = new THREE.BoxGeometry(1, 1, 1);
         const cube = new THREE.Mesh(geometry);
         const meshes = this._sceneManager.Scene.children.filter(child => child instanceof THREE.Mesh);
@@ -55,8 +80,18 @@ export class MeshHandler
         }
         cube.name = name;
         this._sceneManager.Scene.add(cube);
-        this._sceneManager.Renderer.render(this._sceneManager.Scene, this._sceneManager.Camera);
-
         return cube;
+    }
+
+    public DeleteObject(object: THREE.Object3D): void
+    {
+        console.log("Delete");
+        this._sceneManager.Scene.remove(object)
+        const geometry = (object as THREE.Mesh).geometry;
+        geometry.dispose()
+    }
+    public Save()
+    {
+
     }
 }
