@@ -30,7 +30,7 @@ export class MeshHandler
     {
         console.log("Load");
 
-        const data = JSON.parse(document.getElementById('mesh_data')?.textContent || '[]');
+        const data = JSON.parse(document.getElementById('object_data')?.textContent || '[]');
         
         let objects: THREE.Object3D[] = [];
     
@@ -92,6 +92,107 @@ export class MeshHandler
     }
     public Save()
     {
+        console.log("Save");
 
+        // Collect objects from your Three.js scene
+        const objects = this._sceneManager.Scene.children.map((object) => {
+            if (object instanceof THREE.Mesh) {
+                return {
+                    name: object.name,
+                    position_x: object.position.x,
+                    position_y: object.position.y,
+                    position_z: object.position.z,
+                    rotation_x: object.rotation.x,
+                    rotation_y: object.rotation.y,
+                    rotation_z: object.rotation.z,
+                    scale_x: object.scale.x,
+                    scale_y: object.scale.y,
+                    scale_z: object.scale.z,
+                };
+            }
+        }).filter(Boolean); // Filter out undefined objects
+    
+        const csrf = (document.querySelector('input[name="csrfmiddlewaretoken"]') as HTMLInputElement)?.value;
+    
+        if (!csrf) {
+            console.error("CSRF token not found.");
+            return;
+        }
+    
+        // Make the POST request
+        fetch('/app/object_data/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrf,
+            },
+            body: JSON.stringify(objects), // Send objects as the request payload
+        })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then((data) => {
+            console.log("Objects saved successfully:", data);
+        })
+        .catch((error) => {
+            console.error("Error saving objects:", error);
+        });
+    }
+    public Clear()
+    {
+        console.log("Clear");
+
+        const url = '/app/object_data/'
+        const method = 'DELETE'
+        
+        // Collect objects from your Three.js scene
+        const objects = this._sceneManager.Scene.children.map((object) => {
+            if (object instanceof THREE.Mesh) {
+                return {
+                    name: object.name,
+                    position_x: object.position.x,
+                    position_y: object.position.y,
+                    position_z: object.position.z,
+                    rotation_x: object.rotation.x,
+                    rotation_y: object.rotation.y,
+                    rotation_z: object.rotation.z,
+                    scale_x: object.scale.x,
+                    scale_y: object.scale.y,
+                    scale_z: object.scale.z,
+                };
+            }
+        }).filter(Boolean); // Filter out undefined objects
+    
+        const csrf = (document.querySelector('input[name="csrfmiddlewaretoken"]') as HTMLInputElement)?.value;
+    
+        if (!csrf) {
+            console.error("CSRF token not found.");
+            return;
+        }
+    
+        // Make the POST request
+        fetch(url, {
+            method: method,
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrf,
+            },
+            body: JSON.stringify(objects), // Send objects as the request payload
+        })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then((data) => {
+            console.log("Objects deleted successfully:", data);
+        })
+        .catch((error) => {
+            console.error("Error deleting objects:", error);
+        });
     }
 }

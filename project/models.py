@@ -21,9 +21,15 @@ class ThreeCube(models.Model):
     def serialize_object(self):
         return {
             "name": self.name,
-            "position": [self.position_x, self.position_y, self.position_z],
-            "rotation": [self.rotation_x, self.rotation_y, self.rotation_z],
-            "scale": [self.scale_x, self.scale_y, self.scale_z],
+            "position_x": self.position_x,
+            "position_y": self.position_y,
+            "position_z": self.position_z,
+            "rotation_x": self.rotation_x,
+            "rotation_y": self.rotation_y,
+            "rotation_z": self.rotation_z,
+            "scale_x": self.scale_x,
+            "scale_y": self.scale_y,
+            "scale_z": self.scale_z,
         }
 
     class Meta:

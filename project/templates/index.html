@@ -6,12 +6,12 @@
         <div class="relative w-full h-[48px]">{% include "./common/header.html" %}</div>
         <div class="relative w-full h-full flex items-center justify-between">
             {% comment %} {% include "./common/menu.html" %} {% endcomment %}
-            <div hx-get="{% url "cubes" %}" hx-target="this" hx-swap="innerHTML" hx-trigger="intersect once">
+            <div hx-get="{% url "object_data" %}" hx-target="this" hx-swap="innerHTML" hx-trigger="intersect once">
                 
             </div>
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
         </div>
         <div class="relative w-full h-[48px]">{% include "./common/footer.html" %}</div>
     </div>
 </body>
-{{ objects|json_script:"mesh_data" }}
 {% endblock %}

@@ -42,12 +42,12 @@ document.addEventListener("alpine:init", () => {
         },
         save()
         {
-            for (let object of Objects)
-                {
-                    
-                }
-            // const meshHandler = new MeshHandler();
-            // const cube = meshHandler.CreateCube();
+            const meshHandler = new MeshHandler();
+            const objects = meshHandler.Save();
+        },
+        clear()
+        {
+            new MeshHandler().Clear();
         }
     });
     Alpine.store("setup", {

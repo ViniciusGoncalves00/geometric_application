@@ -1,7 +1,1 @@
-<div class="flex flex-col">
-{% for cube in  cubes %}
-
-<div>{{cube}}</div>
-
-{% endfor %}
-</div>
+{{ object_data|json_script:"object_data" }}

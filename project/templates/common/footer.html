@@ -3,7 +3,7 @@
                 bg-secondary drop-shadow-custom-shadow
                 text-primary_text
                 flex items-center justify-between">
-        <div class="w-[256px] h-full text-secondary_text hover:bg-primary hover:text-primary_text hover:drop-shadow-custom-shadow flex items-center justify-evenly">content</div>
+        <div @click="$store.mesh.clear()" class="w-[256px] h-full text-secondary_text hover:bg-primary hover:text-primary_text hover:drop-shadow-custom-shadow flex items-center justify-evenly">clear</div>
         <div class="w-[calc(100%-512px)] h-full flex items-center justify-evenly">
             <button @click="$store.mesh.load()" class="w-[calc(100%/2)] h-full text-secondary_text hover:bg-primary hover:text-primary_text hover:drop-shadow-custom-shadow">load</button>
             <button @click="$store.mesh.create()" class="w-[calc(100%/2)] h-full text-secondary_text hover:bg-primary hover:text-primary_text hover:drop-shadow-custom-shadow">create</button>
