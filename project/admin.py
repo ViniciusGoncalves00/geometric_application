@@ -1,8 +1,7 @@
 from django.contrib import admin
-from project.models import ThreeCube
 
 # Register your models here.
-admin.site.register(ThreeCube)
+# admin.site.register(ThreeCube)
 
 # @admin.register(ThreeCube)
 # class ThreeCubeAdmin(admin.ModelAdmin):

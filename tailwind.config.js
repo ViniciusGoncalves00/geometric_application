@@ -2,25 +2,29 @@
 module.exports = {
   plugins: [require("daisyui")],
   content: ['./project/**/*.{html,js,ts,jsx,tsx}'],
-  theme: {
-    extend: {
+  theme:
+  {
+    extend:
+    {
       fontFamily: {
-        Imperial: ["Imperial", "sans-serif"],
+        Montserrat: ["Montserrat"],
         RobotoCondensed: ["Roboto Condensed"],
       },
-      colors: {
+      dropShadow:
+      {
+        "custom-shadow-1": "0px 0px 4px rgb(0 0 0 / 0.10)",
+        "custom-shadow-2": "4px 4px 4px rgb(0 0 0 / 0.05)"
+      },
+      colors:
+      {
         primary: "rgba(var(--primary))",
+        primary_highlight: "rgba(var(--primary_highlight))",
         secondary: "rgba(var(--secondary))",
     
         primary_text: "rgba(var(--primary_text))",
-        secondary_text:"rgba(var(--secondary_text))",
-      },
-      dropShadow: {
-        "custom-shadow": "4px 4px 4px rgb(0 0 0 / 0.1)"
-      },
-      rounded: {
-        "custom-rounded": "4px",
+        primary_highlight_text:"rgba(var(--primary_highlight_text))",
       }
     },
   },
+  plugins: [],
 }
